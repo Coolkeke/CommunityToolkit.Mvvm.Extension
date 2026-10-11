@@ -7,7 +7,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<SignAssembly>False</SignAssembly>
-		<RepositoryUrl>https://github.com/Layui-WPF-Team/Layui-WPF</RepositoryUrl>
+		<RepositoryUrl>https://github.com/Coolkeke/CommunityToolkit.Mvvm.Extension</RepositoryUrl>
 		<PackageTags>CommunityToolkit.Mvvm</PackageTags>
 		<PackageReleaseNotes>新增CommunityToolkit.Mvvm扩展核心骨架</PackageReleaseNotes>
 		<Authors>wenke</Authors>

@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net4.5;net4.5.2;net4.6;net4.6.2;net4.7;net4.7.2;net4.8;netcoreapp3.0;netcoreapp3.1;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+		<UseWPF>true</UseWPF>
+		<AssemblyTitle>FilexUI.CommunityToolkit.Mvvm.Extension.WPF</AssemblyTitle>
+		<Description>当前库是CommunityToolkit.Mvvm.Extension 的 WPF 版本，提供 Dialog、Module、Navigation 功能扩展</Description>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<SignAssembly>False</SignAssembly>
+		<RepositoryUrl>https://github.com/Layui-WPF-Team/Layui-WPF</RepositoryUrl>
+		<PackageTags>CommunityToolkit.Mvvm</PackageTags>
+		<PackageReleaseNotes>新增 Dialog、Module、Navigation 功能扩展</PackageReleaseNotes>
+		<Authors>wenke</Authors>
+		<Title>这是一款支持Dialog、Module、Navigation功能的CommunityToolkit.Mvvm扩展包</Title>
+		<Version>1.0.0.0</Version>
+		<Copyright>© MaShangFeng</Copyright>
+		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+		<Company />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net4.5'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>1.1.1</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net4.5.2'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>1.1.1</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net4.6'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>1.1.1</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net4.6.2'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net4.7'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net4.7.2'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net4.8'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-windows'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection">
+			<Version>10.0.11</Version>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\FilexUI.CommunityToolkit.Mvvm.Extension\FilexUI.CommunityToolkit.Mvvm.Extension.csproj" />
+	</ItemGroup>
+ 
+
+</Project>

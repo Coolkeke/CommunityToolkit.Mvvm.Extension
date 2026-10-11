@@ -1,5 +1,7 @@
 # CommunityToolkit.Mvvm.Extension
 
+> **语言**: **中文** · [English](README.md)
+
 `CommunityToolkit.Mvvm.Extension` 是一款为 **CommunityToolkit.Mvvm** 量身打造的功能扩展骨架包，在保留 CommunityToolkit.Mvvm 轻量、现代、强类型优势的同时，为 WPF 应用补上企业级 MVVM 框架所需的三大核心能力：**导航（Navigation）**、**对话框（Dialog）** 与 **模块化（Module / MEF）**。
 
 它借鉴了 Prism 等成熟框架的优秀设计理念与命名习惯，但**不引入 Prism 的依赖与复杂度**，直接构建在 `Microsoft.Extensions.DependencyInjection` 之上，真正做到开箱即用、零侵入、渐进式采用。

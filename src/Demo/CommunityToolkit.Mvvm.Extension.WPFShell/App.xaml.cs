@@ -20,7 +20,7 @@ namespace CommunityToolkit.Mvvm.Extension.WPFShell
 
         protected override void RegisterServices(IServiceCollection services)
         {
-            services.RegisterForNavigation<MainWindow>();
+            services.RegisterForNavigation<MainWindow>(); 
         }
         protected override void OnStartup(StartupEventArgs e)
         {

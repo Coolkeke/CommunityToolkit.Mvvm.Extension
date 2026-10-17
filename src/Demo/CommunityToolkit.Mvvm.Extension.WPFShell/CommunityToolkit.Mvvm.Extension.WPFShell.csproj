@@ -11,6 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Code\FilexUI.CommunityToolkit.Mvvm.Extension.WPF\FilexUI.CommunityToolkit.Mvvm.Extension.WPF.csproj" />
     <ProjectReference Include="..\..\Code\FilexUI.CommunityToolkit.Mvvm.Extension\FilexUI.CommunityToolkit.Mvvm.Extension.csproj" />
+    <ProjectReference Include="..\TestModule\TestModule.csproj" />
+    <ProjectReference Include="..\View1Module\View1Module.csproj" />
   </ItemGroup>
  
 

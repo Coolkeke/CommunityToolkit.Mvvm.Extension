@@ -10,10 +10,10 @@
 		<SignAssembly>False</SignAssembly>
 		<RepositoryUrl>https://github.com/Coolkeke/CommunityToolkit.Mvvm.Extension</RepositoryUrl>
 		<PackageTags>CommunityToolkit.Mvvm</PackageTags>
-		<PackageReleaseNotes>新增 Dialog、Module、Navigation 功能扩展</PackageReleaseNotes>
+		<PackageReleaseNotes>修复模块加载是导航失效问题</PackageReleaseNotes>
 		<Authors>wenke</Authors>
 		<Title>这是一款支持Dialog、Module、Navigation功能的CommunityToolkit.Mvvm扩展包</Title>
-		<Version>1.0.0.0</Version>
+		<Version>1.0.0.1</Version>
 		<Copyright>© MaShangFeng</Copyright>
 		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
 		<Company />

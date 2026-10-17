@@ -16,6 +16,7 @@ namespace CommunityToolkit.Mvvm
     public class NavigationService : INavigationService
     {
         private static readonly ConcurrentDictionary<string, WeakReference> regionTargets = new ConcurrentDictionary<string, WeakReference>();
+        private static readonly ConcurrentDictionary<NavigationService, byte> instances = new ConcurrentDictionary<NavigationService, byte>();
 
         private readonly IServiceProvider serviceProvider;
         private readonly Dictionary<string, IRegion> regions = new Dictionary<string, IRegion>();
@@ -23,6 +24,7 @@ namespace CommunityToolkit.Mvvm
         private readonly Dictionary<INavigationJournalEntry, FrameworkElement> journalViews = new Dictionary<INavigationJournalEntry, FrameworkElement>();
         private readonly Dictionary<string, RegionRegistration> regionRegistrations = new Dictionary<string, RegionRegistration>();
         private readonly HashSet<string> navigationInProgress = new HashSet<string>(StringComparer.Ordinal);
+        private readonly Dictionary<string, PendingNavigation> pendingNavigations = new Dictionary<string, PendingNavigation>(StringComparer.Ordinal);
         private readonly Dictionary<string, Type> viewTypes;
 
         /// <summary>
@@ -34,6 +36,7 @@ namespace CommunityToolkit.Mvvm
         {
             this.serviceProvider = serviceProvider;
             viewTypes = registrations.ToDictionary(x => x.ViewName, x => x.ViewType, StringComparer.Ordinal);
+            instances.TryAdd(this, 0);
         }
 
         /// <summary>
@@ -211,6 +214,11 @@ namespace CommunityToolkit.Mvvm
             {
                 throw new InvalidOperationException($"RegionName '{newRegionName}' already exists.");
             }
+
+            foreach (NavigationService service in instances.Keys)
+            {
+                service.OnRegionRegistered(newRegionName);
+            }
         }
         /// <summary>
         /// 将区域导航到已注册视图，并返回本次导航是否真正完成。
@@ -262,7 +270,17 @@ namespace CommunityToolkit.Mvvm
                     throw new InvalidOperationException($"View '{entry.ViewName}' has not been registered.");
                 }
 
-                var region = GetRegionCore(entry.RegionName);
+                IRegion region;
+                try
+                {
+                    region = GetRegionCore(entry.RegionName);
+                }
+                catch (RegionNotFoundException)
+                {
+                    QueuePendingNavigation(entry, updateJournal, completed);
+                    navigationInProgress.Remove(entry.RegionName);
+                    return;
+                }
                 var journal = GetJournalCore(entry.RegionName);
                 var oldView = GetCurrentView(region);
                 var oldEntry = journal.CurrentEntry;
@@ -355,6 +373,22 @@ namespace CommunityToolkit.Mvvm
             }
         }
 
+        private void QueuePendingNavigation(INavigationJournalEntry entry, bool updateJournal, Action<bool> completed)
+        {
+            pendingNavigations[entry.RegionName] = new PendingNavigation(entry, updateJournal, completed);
+        }
+
+        private void OnRegionRegistered(string regionName)
+        {
+            if (!pendingNavigations.TryGetValue(regionName, out var pending))
+            {
+                return;
+            }
+
+            pendingNavigations.Remove(regionName);
+            RunOnUiThread(() => ExecuteNavigation(pending.Entry, pending.UpdateJournal, pending.Completed));
+        }
+
         private FrameworkElement CreateView(Type viewType)
         {
             var view = serviceProvider.GetService(viewType) ?? Activator.CreateInstance(viewType);
@@ -401,7 +435,7 @@ namespace CommunityToolkit.Mvvm
                 !(regionTargetReference.Target is FrameworkElement regionTarget))
             {
                 regionTargets.TryRemove(regionName, out _);
-                throw new InvalidOperationException($"RegionName '{regionName}' does not exist.");
+                throw new RegionNotFoundException($"RegionName '{regionName}' does not exist.");
             }
 
             var adapter = serviceProvider.GetServices<INavigationAdapter>()
@@ -558,6 +592,7 @@ namespace CommunityToolkit.Mvvm
         {
             regionTargets[regionName] = new WeakReference(regionTarget);
             AttachWindowClosedHandler(regionName, regionTarget);
+            OnRegionRegistered(regionName);
         }
 
         private void AttachWindowClosedHandler(string regionName, FrameworkElement regionTarget)
@@ -690,6 +725,28 @@ namespace CommunityToolkit.Mvvm
             {
                 Window = window;
                 ClosedHandler = closedHandler;
+            }
+        }
+
+        private sealed class PendingNavigation
+        {
+            public PendingNavigation(INavigationJournalEntry entry, bool updateJournal, Action<bool> completed)
+            {
+                Entry = entry;
+                UpdateJournal = updateJournal;
+                Completed = completed;
+            }
+
+            public INavigationJournalEntry Entry { get; }
+            public bool UpdateJournal { get; }
+            public Action<bool> Completed { get; }
+        }
+
+        private sealed class RegionNotFoundException : InvalidOperationException
+        {
+            public RegionNotFoundException(string message)
+                : base(message)
+            {
             }
         }
     }

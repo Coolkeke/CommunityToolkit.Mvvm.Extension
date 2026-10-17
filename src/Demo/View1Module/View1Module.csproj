@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-windows;</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.11" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Code\FilexUI.CommunityToolkit.Mvvm.Extension.WPF\FilexUI.CommunityToolkit.Mvvm.Extension.WPF.csproj" />
+		<ProjectReference Include="..\..\Code\FilexUI.CommunityToolkit.Mvvm.Extension\FilexUI.CommunityToolkit.Mvvm.Extension.csproj" />
+	</ItemGroup>
+</Project>
